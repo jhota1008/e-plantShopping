@@ -302,20 +302,25 @@ function ProductList({ onHomeClick }) {
                             <div className="product-list">
                             {category.plants.map((plant, plantIndex) => ( 
                                 <div className="product-card" key={plantIndex}> 
-                                <img 
-                                    className="product-image" 
-                                    src={plant.image} 
-                                    alt={plant.name}
-                                />
-                                <div className="product-title">{plant.name}</div> 
-                                <div className="product-description">{plant.description}</div>
-                                <div className="product-cost">{plant.cost}</div>
-                                <button
+                                    <img 
+                                        className="product-image" 
+                                        src={plant.image} 
+                                        alt={plant.name}
+                                    />
+                                    <div className="product-title">{plant.name}</div> 
+                                    <div className="product-description">{plant.description}</div>
+                                    <div className="product-cost">{plant.cost}</div>
+                                    <button
                                     className="product-button"
                                     onClick={() => handleAddToCart(plant)} 
-                                >
-                                    Add to Cart
-                                </button>
+                                    disabled={!!addedToCart[plant.name]}   // ✅ disable if added
+                                    style={{
+                                        backgroundColor: addedToCart[plant.name] ? "gray" : "#4CAF50",
+                                        cursor: addedToCart[plant.name] ? "not-allowed" : "pointer"
+                                    }}
+                                    >
+                                        {addedToCart[plant.name] ? "Added to Cart" : "Add to Cart"}
+                                    </button>
                                 </div>
                             ))}
                             </div>
